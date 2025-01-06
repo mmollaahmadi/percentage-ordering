@@ -5,7 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        Yekan: ['Yekan', 'sans-serif'], // Add IranSans to the font family
+      },
+    },
   },
   plugins: [],
 }
