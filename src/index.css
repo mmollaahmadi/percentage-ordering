@@ -4,9 +4,7 @@
 
 @font-face {
   font-family: 'Yekan';
-  src: url('/src/assets/fonts/Yekan/Yekan.woff2') format('woff2'),
-  url('/src/assets/fonts/Yekan/Yekan.woff') format('woff'),
-  url('/src/assets/fonts/Yekan/Yekan.ttf') format('truetype');
+  src: url('/src/assets/fonts/Yekan/Yekan.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
