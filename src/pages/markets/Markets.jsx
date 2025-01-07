@@ -4,6 +4,7 @@ import Tabs from "../../components/composite/tabs";
 import MarketTabContext from "../../components/screen/market-tab-context";
 
 const Markets = () => {
+    const [loading, setLoading] = useState(false);
     const [tabsData, setTabsData] = useState([
         {
             id: 1,
@@ -33,16 +34,20 @@ const Markets = () => {
 
     const getMarketsInformation = () => {
         try {
+            setLoading(true);
             api.get('/v1/mkt/markets/').then((response) => {
                 if (response.status === 200) {
-                    ['IRT', 'USDT']?.forEach((code) =>
-                        {
+                    ['IRT', 'USDT']?.forEach((code) => {
                             setTabsData((previousTabsData) =>
-                                previousTabsData?.map(item => item.code === code ? {...item, data:  (response.data?.results?.filter((r) => r.currency2?.code === code))} : item)
+                                previousTabsData?.map(item => item.code === code ? {
+                                    ...item,
+                                    data: (response.data?.results?.filter((r) => r.currency2?.code === code))
+                                } : item)
                             );
                         }
                     )
                 }
+                setLoading(false);
             });
         } catch (e) {
             console.error(e)
@@ -60,14 +65,16 @@ const Markets = () => {
                 tabsData={tabsData?.map((item) => (
                     {
                         ...item,
-                        context: <MarketTabContext
-                            selectedPageNumber={item?.selectedPageNumber}
-                            onChangePageNumber={onChangePageNumber}
-                            key={item?.id}
-                            id={item?.id}
-                            data={item?.data}
-                        />,
-            }
+                        context: loading ?
+                            <p className={'text-gray-500 text-center w-full my-3'}>در حال بارگزاری...</p> :
+                            <MarketTabContext
+                                selectedPageNumber={item?.selectedPageNumber}
+                                onChangePageNumber={onChangePageNumber}
+                                key={item?.id}
+                                id={item?.id}
+                                data={item?.data}
+                            />,
+                    }
                 ))}
             />
         </div>
