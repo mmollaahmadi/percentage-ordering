@@ -40,7 +40,7 @@ const MatchTabContext = () => {
                 {
                     data?.map((item, index) => (
                         <div
-                            className={'grid grid-cols-6 justify-center rounded bg-gray-100 bg-opacity-50 my-2 px-4 py-2'}
+                            className={'grid grid-cols-2 md:grid-cols-6 justify-center rounded bg-gray-100 bg-opacity-50 my-2 px-4 py-2'}
                             key={index}
                         >
                             <div className={'col-span-2 flex gap-2'}>

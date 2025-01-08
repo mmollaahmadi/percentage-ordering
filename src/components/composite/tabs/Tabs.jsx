@@ -3,7 +3,7 @@ import { useSwipeable } from 'react-swipeable';
 
 const Tabs = ({tabsData}) => {
     const [activeTab, setActiveTab] = React.useState(1);
-    const tabContext = tabsData?.filter((item) => (item.id === activeTab))[0].context
+    const tabContext = tabsData?.find((item) => (item.id === activeTab))?.context
 
     const onSwipeLeftHandler = () => {
         let _activeTab = activeTab < tabsData?.length ? activeTab + 1 : activeTab;
