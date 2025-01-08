@@ -2,7 +2,9 @@ import React, {useEffect} from 'react';
 import {useParams} from "react-router-dom";
 import api from "../../../api/axios.js";
 import Loading from "../../atomic/loading";
-import ActiveItem from "../../composite/active-item/index.js";
+import ActiveItem from "../../composite/active-item";
+import Decimal from "decimal.js";
+import TotalItem from "../../composite/total-item";
 
 const ActiveTabContext = ({ type }) => {
     const [loading, setLoading] = React.useState(false);
@@ -15,7 +17,7 @@ const ActiveTabContext = ({ type }) => {
             api.get(`/v2/mth/actives/${marketId}/?type=${type}`).then((response) => {
                 if (response.status === 200) {
                     setLoading(false);
-                    setData(response?.data?.orders.slice(0, 9));
+                    setData(response?.data?.orders.slice(0, 10));
                 }
             })
         } catch (e) {
@@ -40,13 +42,17 @@ const ActiveTabContext = ({ type }) => {
         try {
             const sum = data?.reduce((accumulate, current) => {
                 return {
-                    value: parseFloat(accumulate.value) + parseFloat(current.value),
-                    remain: parseFloat(accumulate.value) + parseFloat(current.value),
-                    price: parseFloat(accumulate.price) + (parseFloat(current.price) * parseFloat(current.value)),
+                    value: new Decimal(accumulate.value).plus(current.value).toString(),
+                    remain: new Decimal(accumulate.remain).plus(current.remain).toString(),
+                    price: new Decimal(accumulate.price).plus(new Decimal(current.price).times(current.value)),
                 }
             }, {value: 0, remain: 0, price: 0});
 
-            setTotalResult({...sum, price: parseFloat(sum.price/sum.value)});
+            setTotalResult([
+                {title: 'مجموع باقیمانده', value: sum?.remain},
+                {title: 'میانگین وزنی قیمت', value: new Decimal(sum.price).dividedBy(sum.value).toFixed(3).toString()},
+                {title: 'مجموع ارزش', value: sum?.value},
+            ]);
         } catch (e) {
             console.error(e);
         }
@@ -64,7 +70,7 @@ const ActiveTabContext = ({ type }) => {
                 ))
             }
             <div className={'border-t mt-3'}></div>
-            <ActiveItem
+            <TotalItem
                 className={'bg-green-700 bg-opacity-100'}
                 data={totalResult}
             />
