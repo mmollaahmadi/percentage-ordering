@@ -4,7 +4,7 @@ import {Outlet} from "react-router-dom";
 
 const Layout = () => {
     return (
-        <div className={'min-w-[100vw] text-white bg-black font-Yekan'} style={{direction: 'rtl'}}>
+        <div className={'min-w-[100vw] text-black dark:text-white bg-white dark:bg-black font-Yekan'} style={{direction: 'rtl'}}>
             <Header/>
             <div className={'min-h-[90vh] w-full px-10 py-10'} >
                 <Outlet/>

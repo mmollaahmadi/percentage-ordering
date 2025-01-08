@@ -26,7 +26,7 @@ const CustomInput = ({ label, value, onChange, ...rest }) => {
         <div className={'flex items-start gap-1 flex-col'}>
             <label className={'text-xs'}>{label}</label>
             <input
-                className={'w-fit px-4 border-white border rounded-lg text-white min-w-32'}
+                className={'w-fit px-4 rounded-lg min-w-32 bg-gray-200 dark:bg-gray-600'}
                 value={value}
                 onChange={handleChange}
                 {...rest}

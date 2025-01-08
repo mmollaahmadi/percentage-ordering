@@ -27,7 +27,7 @@ const MarketTabContext = ({ selectedPageNumber, onChangePageNumber, data, id}) =
                         )?.map((pageNumber, index) =>
                             <button
                                 onClick={() => onChangePageNumber(pageNumber + 1, id)}
-                                className={`p-1 border-0 ${selectedPageNumber === pageNumber + 1 ? 'text-white' : 'text-gray-500'}`}
+                                className={`p-1 border-none outline-none focus:outline-0 ${selectedPageNumber === pageNumber + 1 ? 'bg-gray-200 text-black dark:text-white dark:bg-gray-800' : 'text-gray-400 bg-gray-100 dark:bg-gray-900 dark:text-gray-500'}`}
                                 key={index}>{pageNumber + 1}
                             </button>)
                     }

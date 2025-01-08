@@ -13,7 +13,7 @@ const MarketDetails = () => {
             <div className={'flex items-center justify-center gap-10'}>
                 <p>{`سفارشات و معاملات ${marketId}`}</p>
                 <button
-                    className={'w-fit px-3 '}
+                    className={'w-fit px-3 bg-gray-200 dark:bg-gray-800'}
                     onClick={() => navigate(-1)}
                 >
                     بازگشت

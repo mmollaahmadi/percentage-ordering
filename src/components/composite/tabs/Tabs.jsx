@@ -5,15 +5,15 @@ const Tabs = ({tabsData}) => {
     const tabContext = tabsData?.filter((item) => (item.id === activeTab))[0].context
 
     return (
-        <div className="rounded-lg border border-gray-500">
-            <div className="flex items-center justify-start border-b gap-4 p-2">
+        <div className="rounded-lg border border-gray-900 dark:border-gray-500">
+            <div className="flex items-center justify-start border-b border-gray-900 dark:border-gray-500 gap-4 p-2">
                 {tabsData?.map((item, index) => (
                     <button
                         key={index}
                         onClick={
                             () => setActiveTab(item?.id)
                         }
-                        className={` ${activeTab === item.id ? 'text-white bg-gray-150' : 'text-gray-500 bg-transparent'}`}
+                        className={`focus:outline-none ${activeTab === item.id ? 'text-black bg-gray-200 dark:text-white dark:bg-gray-700' : 'text-black bg-gray-50 dark:text-gray-500 dark:bg-transparent'}`}
                     >
                         {item?.title}
                     </button>

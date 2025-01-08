@@ -49,7 +49,24 @@ const ActiveTabContext = ({type}) => {
     useEffect(() => {
         setLoading(true);
         getData();
-        setPercentageValue(0)
+        setPercentageValue(0);
+        setCalculatedValue([
+            {
+                code: 'remain',
+                title: 'مجموع حجم ارز قابل دریافت',
+                value: null,
+            },
+            {
+                code: 'price',
+                title: 'میانگین قیمت ارز',
+                value: null,
+            },
+            {
+                code: 'total',
+                title: 'مجموع مبلغ قابل پرداخت',
+                value: null,
+            }
+        ])
 
         const intervalId = setInterval(() => {
             getData();
@@ -76,7 +93,9 @@ const ActiveTabContext = ({type}) => {
             ]);
 
             // if percentage is entered then run calculate method too
-            updateCalculatedValues();
+            if(percentageValue > 0 && calculatedValue?.every(a => a.value !== null)){
+                updateCalculatedValues();
+            }
         } catch (e) {
             console.error(e);
         }
@@ -100,7 +119,7 @@ const ActiveTabContext = ({type}) => {
 
     return loading ? <Loading/> : (
         <div className={'flex flex-col w-full'}>
-            <div className={'grid grid-cols-8 gap-2 bg-gray-800 w-full p-3 items-end rounded-lg'}>
+            <div className={'grid grid-cols-8 gap-2 bg-gray-100 dark:bg-gray-800 w-full p-3 items-end rounded-lg'}>
                 <div className={'col-span-2 flex gap-2 items-end'}>
                     <CustomInput
                         label={'درصد ورودی'}
@@ -129,7 +148,7 @@ const ActiveTabContext = ({type}) => {
             <TotalItem
                 data={totalResult}
             />
-            <div className={'border-t mt-3'}></div>
+            <div className={'border-t border-gray-500 mt-3'}></div>
 
             {
                 data?.map((item, index) => (
