@@ -49,6 +49,7 @@ const ActiveTabContext = ({type}) => {
     useEffect(() => {
         setLoading(true);
         getData();
+        setPercentageValue(0)
 
         const intervalId = setInterval(() => {
             getData();
