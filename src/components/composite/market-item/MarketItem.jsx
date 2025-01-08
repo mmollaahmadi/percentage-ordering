@@ -8,9 +8,9 @@ const MarketItem = ({data}) => {
     return (
         <div
             onClick={() => navigate('/market/' + data.id)}
-            className={'grid grid-cols-8 bg-gray-300 dark:bg-gray-600 bg-opacity-50 dark:bg-opacity-50 hover:bg-opacity-90 dark:hover:bg-opacity-80 hover:cursor-pointer rounded-lg my-2 py-2 px-4'}
+            className={'grid grid-cols-2 md:grid-cols-8 gap-2 bg-gray-300 dark:bg-gray-600 bg-opacity-50 dark:bg-opacity-50 hover:bg-opacity-90 dark:hover:bg-opacity-80 hover:cursor-pointer rounded-lg my-2 py-2 px-4'}
         >
-            <div className={'col-span-1 flex gap-2 items-center'}>
+            <div className={'col-span-2 md:col-span-1 flex gap-2 items-center'}>
                 <img className={'w-6'} src={data?.currency2?.image} alt="market-image"/>
                 <p>{data?.currency2?.title_fa} / {data?.currency2?.title}</p>
             </div>

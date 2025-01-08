@@ -119,7 +119,7 @@ const ActiveTabContext = ({type}) => {
 
     return loading ? <Loading/> : (
         <div className={'flex flex-col w-full'}>
-            <div className={'grid grid-cols-8 gap-2 bg-gray-100 dark:bg-gray-800 w-full p-3 items-end rounded-lg'}>
+            <div className={'grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-2 bg-gray-100 dark:bg-gray-800 w-full p-3 items-end rounded-lg'}>
                 <div className={'col-span-2 flex gap-2 items-end'}>
                     <CustomInput
                         label={'درصد ورودی'}

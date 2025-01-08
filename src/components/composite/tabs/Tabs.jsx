@@ -22,7 +22,7 @@ const Tabs = ({tabsData}) => {
 
     return (
         <div {...handlers} className="rounded-lg border border-gray-900 dark:border-gray-500">
-            <div className="flex items-center justify-start border-b border-gray-900 dark:border-gray-500 gap-4 p-2">
+            <div className="flex items-center justify-start border-b border-gray-900 dark:border-gray-500 gap-4 p-2 max-w-[300px] md:max-w-full overflow-x-scroll">
                 {tabsData?.map((item, index) => (
                     <button
                         key={index}
