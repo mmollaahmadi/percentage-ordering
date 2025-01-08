@@ -101,13 +101,53 @@ const ActiveTabContext = ({type}) => {
         }
     }
 
+    // const updateCalculatedValues = () =>{
+    //     try {
+    //         const temp = calculatedValue?.map((item) => ({
+    //             ...item,
+    //             value: percentageValue * totalResult?.filter(tr => tr.code === item.code)[0].value / 100,
+    //         }))
+    //         setCalculatedValue(temp)
+    //     } catch (e) {
+    //         console.error(e);
+    //     }
+    // }
+
     const updateCalculatedValues = () =>{
         try {
-            const temp = calculatedValue?.map((item) => ({
-                ...item,
-                value: percentageValue * totalResult?.filter(tr => tr.code === item.code)[0].value / 100,
-            }))
-            setCalculatedValue(temp)
+            const totalRemain = totalResult?.find((item) => item.code === 'remain')?.value;
+            const adjustedRemain = totalRemain * (percentageValue / 100);
+
+            const weightedPrice =
+                data?.reduce((sum, order) => sum + order.price * order.remain, 0) / totalRemain;
+
+            let cumulativeRemain = 0;
+            let totalPayable = 0;
+
+            for (const order of data) {
+                if (cumulativeRemain >= adjustedRemain) break;
+
+                const remainToUse = Math.min(order.remain, adjustedRemain - cumulativeRemain);
+                totalPayable += remainToUse * order.price;
+                cumulativeRemain += remainToUse;
+            }
+            setCalculatedValue([
+                {
+                    code: 'remain',
+                    title: 'مجموع حجم ارز قابل دریافت',
+                    value: adjustedRemain,
+                },
+                {
+                    code: 'price',
+                    title: 'میانگین قیمت ارز',
+                    value: weightedPrice,
+                },
+                {
+                    code: 'total',
+                    title: 'مجموع مبلغ قابل پرداخت',
+                    value: totalPayable,
+                }
+            ])
         } catch (e) {
             console.error(e);
         }
