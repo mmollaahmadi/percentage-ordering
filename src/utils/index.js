@@ -6,3 +6,13 @@ export const prepareNumbersToDisplay = (numbers) => {
         console.error(e);
     }
 }
+
+export const preparedTimeToDisplay = (time) => {
+    try {
+        const date = new Date(time * 1000);
+        return `${date.getUTCHours()}:${date.getUTCMinutes()}`;
+    } catch (e) {
+        console.error(e);
+        return "-"
+    }
+}

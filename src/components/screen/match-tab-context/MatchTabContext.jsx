@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {useParams} from "react-router-dom";
 import api from "../../../api/axios.js";
 import Loading from "../../atomic/loading";
+import {preparedTimeToDisplay, prepareNumbersToDisplay} from "../../../utils";
 
 const MatchTabContext = () => {
     const [loading, setLoading] = React.useState(false);
@@ -13,7 +14,7 @@ const MatchTabContext = () => {
             api.get(`/v1/mth/matches/${marketId}/`).then((response) => {
                 if (response.status === 200) {
                     setLoading(false);
-                    setData(response?.data?.slice(0, 9));
+                    setData(response?.data?.slice(0, 10));
                 }
             })
         } catch (e) {
@@ -51,13 +52,13 @@ const MatchTabContext = () => {
                             <div className={'col-span-2 flex gap-2'}>
                                 <p>قیمت: </p>
                                 <p>
-                                    {item?.price}
+                                    {prepareNumbersToDisplay(item?.price)}
                                 </p>
                             </div>
                             <div className={'col-span-2 flex gap-2'}>
                                 <p>زمان: </p>
                                 <p>
-                                    {item?.time}
+                                    {preparedTimeToDisplay(item?.time)}
                                 </p>
                             </div>
                         </div>
