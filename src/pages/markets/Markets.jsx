@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import api from "../../api/axios.js";
 import Tabs from "../../components/composite/tabs";
 import MarketTabContext from "../../components/screen/market-tab-context";
+import Loading from "../../components/atomic/loading";
 
 const Markets = () => {
     const [loading, setLoading] = useState(false);
@@ -66,7 +67,7 @@ const Markets = () => {
                     {
                         ...item,
                         context: loading ?
-                            <p className={'text-gray-500 text-center w-full my-3'}>در حال بارگزاری...</p> :
+                            <Loading/> :
                             <MarketTabContext
                                 selectedPageNumber={item?.selectedPageNumber}
                                 onChangePageNumber={onChangePageNumber}

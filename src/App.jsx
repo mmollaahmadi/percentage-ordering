@@ -11,7 +11,7 @@ function App() {
             <Routes>
                 <Route element={<Layout/>}>
                     <Route path="/" element={<MarketsPage/>}/>
-                    <Route path="/market" element={<MarketDetailsPage/>}/>
+                    <Route path="/market/:marketId" element={<MarketDetailsPage/>}/>
                 </Route>
             </Routes>
         </Router>

@@ -1,12 +1,15 @@
 import React from 'react';
 import {prepareNumbersToDisplay} from "../../../utils/index.js";
 import {LeftArrowIcon} from "../../../assets/icons/index.jsx";
+import {useNavigate} from "react-router-dom";
 
 const MarketItem = ({data}) => {
-    console.log(data);
+    const navigate = useNavigate();
     return (
         <div
-            className={'grid grid-cols-8 bg-gray-600 bg-opacity-50 hover:bg-opacity-80 hover:cursor-pointer rounded-lg my-2 py-2 px-4'}>
+            onClick={() => navigate('/market/' + data.id)}
+            className={'grid grid-cols-8 bg-gray-600 bg-opacity-50 hover:bg-opacity-80 hover:cursor-pointer rounded-lg my-2 py-2 px-4'}
+        >
             <div className={'col-span-1 flex gap-2 items-center'}>
                 <img className={'w-6'} src={data?.currency2?.image} alt="market-image"/>
                 <p>{data?.currency2?.title_fa} / {data?.currency2?.title}</p>
